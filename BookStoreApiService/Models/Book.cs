@@ -8,6 +8,6 @@ namespace BookStoreApiService.Models
     public class Book : Entity
     {
         public string Title { get; set; }
-        public IList<Author> Authors { get; set; }
+        public IList<Author> Authors { get; set; } = new List<Author>();
     }
 }

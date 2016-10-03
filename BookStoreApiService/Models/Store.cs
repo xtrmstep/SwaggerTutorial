@@ -6,7 +6,7 @@ namespace BookStoreApiService.Models
     {
         public string Name { get; set; }
         public string Address { get; set; }
-        public IList<Book> Books { get; set; }
-        public IList<Author> Authors { get; set; }
+        public IList<Book> Books { get; set; } = new List<Book>();
+        public IList<Author> Authors { get; set; } = new List<Author>();
     }
 }

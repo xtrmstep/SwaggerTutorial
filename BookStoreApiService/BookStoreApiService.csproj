@@ -90,6 +90,8 @@
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\DatabaseSeed.cs" />
+    <Compile Include="Data\Exceptions\DataNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
