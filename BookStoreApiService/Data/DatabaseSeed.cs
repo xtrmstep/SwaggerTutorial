@@ -8,8 +8,12 @@ namespace BookStoreApiService.Data
 {
     public static class DatabaseSeed
     {
+        private static bool _initialized = false;
         public static void Init()
         {
+            if (_initialized) return;
+            _initialized = true;
+
             Database<Author>.Clear();
             Database<Author>.Clear();
             Database<Author>.Clear();

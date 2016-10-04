@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using BookStoreApiService.Models;
+using BookStoreApiService.Data;
 
 namespace BookStoreApiService.Controllers
 {
@@ -9,12 +10,7 @@ namespace BookStoreApiService.Controllers
     {
         public IHttpActionResult Get()
         {
-            var listOfStores = new List<Store>(new[]
-            {
-                new Store {Name = "Store 1", Address = "Address 1"},
-                new Store {Name = "Store 2", Address = "Address 2"},
-                new Store {Name = "Store 3", Address = "Address 3"}
-            });
+            var listOfStores = Database<Store>.Read();
             return Ok(listOfStores);
         }
 

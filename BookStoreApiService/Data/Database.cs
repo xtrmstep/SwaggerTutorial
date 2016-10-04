@@ -13,7 +13,7 @@ namespace BookStoreApiService.Data
 
         public static void Create(T entity)
         {
-            var newId = _data.Keys.Max() + 1;
+            var newId = _data.Keys.Count == 0 ? 0 : _data.Keys.Max() + 1;
             entity.Id = newId;
             _data.Add(newId, entity);
         }
