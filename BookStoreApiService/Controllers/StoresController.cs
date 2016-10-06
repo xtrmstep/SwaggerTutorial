@@ -16,10 +16,10 @@ namespace BookStoreApiService.Controllers
             return Ok(listOfStores);
         }
 
-        public IHttpActionResult Post(Store store)
+        public IHttpActionResult Post([FromBody] Store store)
         {
             IHttpActionResult badRequest;
-            if (this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
+            if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
 
             try
             {
@@ -32,10 +32,10 @@ namespace BookStoreApiService.Controllers
             }
         }
 
-        public IHttpActionResult Put(Store store)
+        public IHttpActionResult Put([FromBody] Store store)
         {
             IHttpActionResult badRequest;
-            if (this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
+            if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
 
             Database<Store>.Create(store);
             return Ok();

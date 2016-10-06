@@ -18,10 +18,10 @@ namespace BookStoreApiService.Controllers
             return Ok(listOfAuthors);
         }
 
-        public IHttpActionResult Post(Author author)
+        public IHttpActionResult Post([FromBody] Author author)
         {
             IHttpActionResult badRequest;
-            if (this.IsModelValid(ModelState, author, out badRequest)) return badRequest;
+            if (!this.IsModelValid(ModelState, author, out badRequest)) return badRequest;
 
             try
             {
@@ -34,10 +34,10 @@ namespace BookStoreApiService.Controllers
             }
         }
 
-        public IHttpActionResult Put(Author author)
+        public IHttpActionResult Put([FromBody] Author author)
         {
             IHttpActionResult badRequest;
-            if (this.IsModelValid(ModelState, author, out badRequest)) return badRequest;
+            if (!this.IsModelValid(ModelState, author, out badRequest)) return badRequest;
 
             Database<Author>.Create(author);
             return Ok();
