@@ -36,9 +36,9 @@ namespace BookStoreApiService.Data
                 throw new DataNotFoundException();
         }
 
-        public static void Delete(T entity)
+        public static void Delete(int id)
         {
-            _data.Remove(entity.Id);
+            _data.Remove(id);
         }
 
         public static void Clear()
