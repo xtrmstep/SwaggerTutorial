@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.UI;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
@@ -18,6 +19,7 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of books
         /// </summary>
         /// <returns></returns>
+        [ResponseType(typeof(IList<Book>))]
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
@@ -30,6 +32,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
         [Route("api/books/{id}")]
+        [ResponseType(typeof(Book))]
         public IHttpActionResult Get(int id)
         {
             var book = Database<Book>.Read(id);
@@ -62,6 +65,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
+        [ResponseType(typeof(Book))]
         public IHttpActionResult Put([FromBody]Book book)
         {
             IHttpActionResult badRequest;

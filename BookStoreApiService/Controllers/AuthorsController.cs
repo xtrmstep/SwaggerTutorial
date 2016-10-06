@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BookStoreApiService.Models;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 using System.Web.Http.Validation;
 using BookStoreApiService.Data;
@@ -19,6 +20,7 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of authors
         /// </summary>
         /// <returns></returns>
+        [ResponseType(typeof(IList<Author>))]
         public IHttpActionResult Get()
         {
             var listOfAuthors = Database<Author>.Read();
@@ -31,6 +33,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
         [Route("api/authors/{id}")]
+        [ResponseType(typeof(Author))]
         public IHttpActionResult Get(int id)
         {
             var author = Database<Author>.Read(id);
@@ -63,6 +66,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="author">Author model</param>
         /// <returns></returns>
+        [ResponseType(typeof(Author))]
         public IHttpActionResult Put([FromBody] Author author)
         {
             IHttpActionResult badRequest;
