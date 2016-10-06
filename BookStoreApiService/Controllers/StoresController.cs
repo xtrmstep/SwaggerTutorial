@@ -48,7 +48,7 @@ namespace BookStoreApiService.Controllers
             return CreatedAtRoute("DefaultApi", new { controller= "stores", id = store.Id }, store);
         }
 
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete([FromBody] int id)
         {
             Database<Store>.Delete(id);
             return Ok();
