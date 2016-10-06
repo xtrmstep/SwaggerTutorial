@@ -9,6 +9,9 @@ namespace BookStoreApiService.Models
     [DataContract(IsReference = true)]
     public abstract class Entity
     {
+        /// <summary>
+        /// Identifier of the object
+        /// </summary>
         [DataMember]
         public int Id { get; set; }
     }
