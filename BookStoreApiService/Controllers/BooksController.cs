@@ -8,15 +8,27 @@ using BookStoreApiService.Controllers.Helpers;
 
 namespace BookStoreApiService.Controllers
 {
+    /// <summary>
+    /// Represents books
+    /// </summary>
     [Route("api/books")]
     public class BooksController : ApiController
     {
+        /// <summary>
+        /// Returns a list of books
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
             return Ok(listOfBooks);
         }
 
+        /// <summary>
+        /// Returns a book
+        /// </summary>
+        /// <param name="id">Book identifier</param>
+        /// <returns></returns>
         [Route("api/books/{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -24,6 +36,11 @@ namespace BookStoreApiService.Controllers
             return Ok(book);
         }
 
+        /// <summary>
+        /// Updates a book
+        /// </summary>
+        /// <param name="book">Book model</param>
+        /// <returns></returns>
         public IHttpActionResult Post([FromBody] Book book)
         {
             IHttpActionResult badRequest;
@@ -40,6 +57,11 @@ namespace BookStoreApiService.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a book
+        /// </summary>
+        /// <param name="book">Book model</param>
+        /// <returns></returns>
         public IHttpActionResult Put([FromBody]Book book)
         {
             IHttpActionResult badRequest;
@@ -49,6 +71,11 @@ namespace BookStoreApiService.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "books", id = book.Id }, book);
         }
 
+        /// <summary>
+        /// Deletes a book
+        /// </summary>
+        /// <param name="id">Book identifier</param>
+        /// <returns></returns>
         public IHttpActionResult Delete([FromBody] int id)
         {
             Database<Book>.Delete(id);

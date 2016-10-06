@@ -9,15 +9,27 @@ using BookStoreApiService.Controllers.Helpers;
 
 namespace BookStoreApiService.Controllers
 {
+    /// <summary>
+    /// Represents authors
+    /// </summary>
     [Route("api/authors")]
     public class AuthorsController : ApiController
     {
+        /// <summary>
+        /// Returns a list of authors
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult Get()
         {
             var listOfAuthors = Database<Author>.Read();
             return Ok(listOfAuthors);
         }
 
+        /// <summary>
+        /// Returns an author
+        /// </summary>
+        /// <param name="id">Author identifier</param>
+        /// <returns></returns>
         [Route("api/authors/{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -25,6 +37,11 @@ namespace BookStoreApiService.Controllers
             return Ok(author);
         }
 
+        /// <summary>
+        /// Updates an author
+        /// </summary>
+        /// <param name="author">Author model</param>
+        /// <returns></returns>
         public IHttpActionResult Post([FromBody] Author author)
         {
             IHttpActionResult badRequest;
@@ -41,6 +58,11 @@ namespace BookStoreApiService.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates an author
+        /// </summary>
+        /// <param name="author">Author model</param>
+        /// <returns></returns>
         public IHttpActionResult Put([FromBody] Author author)
         {
             IHttpActionResult badRequest;
@@ -50,6 +72,11 @@ namespace BookStoreApiService.Controllers
             return CreatedAtRoute("DefaultApi", new { controller = "author", id = author.Id }, author);
         }
 
+        /// <summary>
+        /// Deletes an author
+        /// </summary>
+        /// <param name="id">Author identifier</param>
+        /// <returns></returns>
         public IHttpActionResult Delete([FromBody] int id)
         {
             Database<Author>.Delete(id);
