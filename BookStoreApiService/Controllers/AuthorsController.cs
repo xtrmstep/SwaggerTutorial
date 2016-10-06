@@ -9,13 +9,20 @@ using BookStoreApiService.Controllers.Helpers;
 
 namespace BookStoreApiService.Controllers
 {
-    [Route("authors")]
+    [Route("api/authors")]
     public class AuthorsController : ApiController
     {
         public IHttpActionResult Get()
         {
             var listOfAuthors = Database<Author>.Read();
             return Ok(listOfAuthors);
+        }
+
+        [Route("api/authors/{id}")]
+        public IHttpActionResult Get(int id)
+        {
+            var author = Database<Author>.Read(id);
+            return Ok(author);
         }
 
         public IHttpActionResult Post([FromBody] Author author)
@@ -40,7 +47,7 @@ namespace BookStoreApiService.Controllers
             if (!this.IsModelValid(ModelState, author, out badRequest)) return badRequest;
 
             Database<Author>.Create(author);
-            return Ok();
+            return CreatedAtRoute("DefaultApi", new { controller = "author", id = author.Id }, author);
         }
 
         public IHttpActionResult Delete(int id)

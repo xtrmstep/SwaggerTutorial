@@ -8,14 +8,20 @@ using BookStoreApiService.Controllers.Helpers;
 
 namespace BookStoreApiService.Controllers
 {
-    [Route("")]
-    [Route("books")]
+    [Route("api/books")]
     public class BooksController : ApiController
     {
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
             return Ok(listOfBooks);
+        }
+
+        [Route("api/books/{id}")]
+        public IHttpActionResult Get(int id)
+        {
+            var book = Database<Book>.Read(id);
+            return Ok(book);
         }
 
         public IHttpActionResult Post([FromBody] Book book)
@@ -40,7 +46,7 @@ namespace BookStoreApiService.Controllers
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
 
             Database<Book>.Create(book);
-            return Ok();
+            return CreatedAtRoute("DefaultApi", new { controller = "books", id = book.Id }, book);
         }
 
         public IHttpActionResult Delete(int id)
