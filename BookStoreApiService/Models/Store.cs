@@ -5,20 +5,16 @@ using System.Runtime.Serialization;
 
 namespace BookStoreApiService.Models
 {
-    [Serializable]
-    [DataContract(IsReference = true)]
     public class Store : Entity
     {
         /// <summary>
         /// Store name
         /// </summary>
-        [DataMember]
         public string Name { get; set; }
 
         /// <summary>
         /// Store address
         /// </summary>
-        [DataMember]
         public string Address { get; set; }
 
         /// <summary>

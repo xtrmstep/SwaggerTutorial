@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
+using AutoMapper;
 using BookStoreApiService.Models;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Controllers.Helpers;
+using BookStoreApiService.Controllers.TransferObjects;
 
 namespace BookStoreApiService.Controllers
 {
@@ -18,11 +20,12 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of stores
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<Store>))]
+        [ResponseType(typeof(IList<StoreModel>))]
         public IHttpActionResult Get()
         {
             var listOfStores = Database<Store>.Read();
-            return Ok(listOfStores);
+            var stores = Mapper.Map<List<StoreModel>>(listOfStores);
+            return Ok(stores);
         }
 
         /// <summary>
@@ -31,10 +34,13 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
         [Route("api/stores/{id}")]
-        [ResponseType(typeof(Store))]
+        [ResponseType(typeof(StoreModel))]
         public IHttpActionResult Get(int id)
         {
-            var store = Database<Store>.Read(id);
+            var storeEntity = Database<Store>.Read(id);
+            if (storeEntity == null) return NotFound();
+
+            var store = Mapper.Map<StoreModel>(storeEntity);
             return Ok(store);
         }
 
@@ -43,14 +49,15 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="store">Store model</param>
         /// <returns></returns>
-        public IHttpActionResult Post([FromBody] Store store)
+        public IHttpActionResult Post([FromBody] StoreModel store)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
 
             try
             {
-                Database<Store>.Update(store);
+                var storeEntity = Mapper.Map<Store>(store);
+                Database<Store>.Update(storeEntity);
                 return Ok();
             }
             catch (DataNotFoundException)
@@ -64,14 +71,16 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="store">Store model</param>
         /// <returns></returns>
-        [ResponseType(typeof(Store))]
-        public IHttpActionResult Put([FromBody] Store store)
+        [ResponseType(typeof(StoreModel))]
+        public IHttpActionResult Put([FromBody] StoreCreateModel store)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
 
-            Database<Store>.Create(store);
-            return CreatedAtRoute("DefaultApi", new { controller= "stores", id = store.Id }, store);
+            var storeEntity = Mapper.Map<Store>(store);
+            Database<Store>.Create(storeEntity);
+            var storeReadModel = Mapper.Map<StoreModel>(storeEntity);
+            return CreatedAtRoute("DefaultApi", new { controller= "stores", id = storeReadModel.Id }, storeReadModel);
         }
 
         /// <summary>

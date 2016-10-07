@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7271A957-D
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreApiServiceTests", "BookStoreApiServiceTests\BookStoreApiServiceTests.csproj", "{108F74AD-0F01-4D59-868B-56FCD36FF779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2074172B-8B11-445A-BA5E-B616C48FBAB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2074172B-8B11-445A-BA5E-B616C48FBAB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2074172B-8B11-445A-BA5E-B616C48FBAB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108F74AD-0F01-4D59-868B-56FCD36FF779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108F74AD-0F01-4D59-868B-56FCD36FF779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108F74AD-0F01-4D59-868B-56FCD36FF779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108F74AD-0F01-4D59-868B-56FCD36FF779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -86,11 +90,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BookStoreConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\Helpers\ControllerHelpers.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\TransferObjects\AuthorModel.cs" />
+    <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookCreateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\StoreModel.cs" />
+    <Compile Include="Controllers\TransferObjects\StoreCreateModel.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\DatabaseSeed.cs" />
     <Compile Include="Data\Exceptions\DataNotFoundException.cs" />

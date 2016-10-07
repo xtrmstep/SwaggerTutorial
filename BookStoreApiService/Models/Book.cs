@@ -7,14 +7,11 @@ using Newtonsoft.Json;
 
 namespace BookStoreApiService.Models
 {
-    [Serializable]
-    [DataContract(IsReference = true)]
     public class Book : Entity
     {
         /// <summary>
         /// Book title 
         /// </summary>
-        [DataMember]
         public string Title { get; set; }
 
         /// <summary>
