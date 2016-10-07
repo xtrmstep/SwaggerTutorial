@@ -21,11 +21,11 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of books
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<BookModel>))]
+        [ResponseType(typeof(IList<BookReadModel>))]
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
-            var books = Mapper.Map<List<BookModel>>(listOfBooks);
+            var books = Mapper.Map<List<BookReadModel>>(listOfBooks);
             return Ok(books);
         }
 
@@ -35,29 +35,50 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
         [Route("api/books/{id}")]
-        [ResponseType(typeof(BookModel))]
+        [ResponseType(typeof(BookReadModel))]
         public IHttpActionResult Get(int id)
         {
             var bookEntity = Database<Book>.Read(id);
             if (bookEntity == null) return NotFound();
 
-            var book = Mapper.Map<BookModel>(bookEntity);
+            var book = Mapper.Map<BookReadModel>(bookEntity);
             return Ok(book);
+        }
+
+        /// <summary>
+        /// Creates a book
+        /// </summary>
+        /// <param name="book">Book model</param>
+        /// <returns></returns>
+        [ResponseType(typeof (BookReadModel))]
+        public IHttpActionResult Post([FromBody] BookCreateModel book)
+        {
+            IHttpActionResult badRequest;
+            if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
+
+            var bookEntity = Mapper.Map<Book>(book);
+            Database<Book>.Create(bookEntity);
+            var bookReadModel = Mapper.Map<BookReadModel>(bookEntity);
+            return CreatedAtRoute("DefaultApi", new {controller = "books", id = bookReadModel.Id}, bookReadModel);
         }
 
         /// <summary>
         /// Updates a book
         /// </summary>
+        /// <param name="id">Book identifier</param>
         /// <param name="book">Book model</param>
         /// <returns></returns>
-        public IHttpActionResult Post([FromBody] BookModel book)
+        [Route("api/books/{id}")]
+        public IHttpActionResult Put(int id, [FromBody]BookUpdateModel book)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
-
             try
             {
-                var bookEntity = Mapper.Map<Book>(book);
+                var bookEntity = Database<Book>.Read(id);
+                if (bookEntity == null) return NotFound();
+
+                Mapper.Map(book, bookEntity);
                 Database<Book>.Update(bookEntity);
                 return Ok();
             }
@@ -68,28 +89,12 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Creates a book
-        /// </summary>
-        /// <param name="book">Book model</param>
-        /// <returns></returns>
-        [ResponseType(typeof(BookModel))]
-        public IHttpActionResult Put([FromBody]BookCreateModel book)
-        {
-            IHttpActionResult badRequest;
-            if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
-
-            var bookEntity = Mapper.Map<Book>(book);
-            Database<Book>.Create(bookEntity);
-            var bookReadModel = Mapper.Map<BookModel>(bookEntity);
-            return CreatedAtRoute("DefaultApi", new { controller = "books", id = bookReadModel.Id }, bookReadModel);
-        }
-
-        /// <summary>
         /// Deletes a book
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
-        public IHttpActionResult Delete([FromBody] int id)
+        [Route("api/books/{id}")]
+        public IHttpActionResult Delete(int id)
         {
             Database<Book>.Delete(id);
             return Ok();

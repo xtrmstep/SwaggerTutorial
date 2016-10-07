@@ -98,7 +98,8 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
-    <Compile Include="Controllers\TransferObjects\BookModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookUpdateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookCreateModel.cs" />
     <Compile Include="Controllers\TransferObjects\StoreReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\StoreCreateModel.cs" />
