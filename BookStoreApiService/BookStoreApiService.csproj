@@ -114,8 +114,8 @@
     <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookCreateModel.cs" />
-    <Compile Include="Controllers\TransferObjects\StoreModel.cs" />
-    <Compile Include="Controllers\TransferObjects\StoreCreateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\StoreReadModel.cs" />
+    <Compile Include="Controllers\TransferObjects\StoreWriteModel.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\DatabaseSeed.cs" />
     <Compile Include="Data\Exceptions\DataNotFoundException.cs" />

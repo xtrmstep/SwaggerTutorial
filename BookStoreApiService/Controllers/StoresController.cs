@@ -20,11 +20,11 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of stores
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<StoreModel>))]
+        [ResponseType(typeof(IList<StoreReadModel>))]
         public IHttpActionResult Get()
         {
             var listOfStores = Database<Store>.Read();
-            var stores = Mapper.Map<List<StoreModel>>(listOfStores);
+            var stores = Mapper.Map<List<StoreReadModel>>(listOfStores);
             return Ok(stores);
         }
 
@@ -34,22 +34,41 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
         [Route("api/stores/{id}")]
-        [ResponseType(typeof(StoreModel))]
+        [ResponseType(typeof(StoreReadModel))]
         public IHttpActionResult Get(int id)
         {
             var storeEntity = Database<Store>.Read(id);
             if (storeEntity == null) return NotFound();
 
-            var store = Mapper.Map<StoreModel>(storeEntity);
+            var store = Mapper.Map<StoreReadModel>(storeEntity);
             return Ok(store);
+        }
+
+        /// <summary>
+        /// Creates a store
+        /// </summary>
+        /// <param name="store">Store model</param>
+        /// <returns></returns>
+        [ResponseType(typeof(StoreReadModel))]
+        public IHttpActionResult Post([FromBody] StoreWriteModel store)
+        {
+            IHttpActionResult badRequest;
+            if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
+
+            var storeEntity = Mapper.Map<Store>(store);
+            Database<Store>.Create(storeEntity);
+            var storeReadModel = Mapper.Map<StoreReadModel>(storeEntity);
+            return CreatedAtRoute("DefaultApi", new { controller = "stores", id = storeReadModel.Id }, storeReadModel);
         }
 
         /// <summary>
         /// Updates a store
         /// </summary>
+        /// <param name="id">Store identifier</param>
         /// <param name="store">Store model</param>
         /// <returns></returns>
-        public IHttpActionResult Post([FromBody] StoreModel store)
+        [Route("api/stores/{id}")]
+        public IHttpActionResult Put([FromUri]int id, [FromBody] StoreWriteModel store)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
@@ -57,6 +76,7 @@ namespace BookStoreApiService.Controllers
             try
             {
                 var storeEntity = Mapper.Map<Store>(store);
+                storeEntity.Id = id;
                 Database<Store>.Update(storeEntity);
                 return Ok();
             }
@@ -67,28 +87,12 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Creates a store
-        /// </summary>
-        /// <param name="store">Store model</param>
-        /// <returns></returns>
-        [ResponseType(typeof(StoreModel))]
-        public IHttpActionResult Put([FromBody] StoreCreateModel store)
-        {
-            IHttpActionResult badRequest;
-            if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
-
-            var storeEntity = Mapper.Map<Store>(store);
-            Database<Store>.Create(storeEntity);
-            var storeReadModel = Mapper.Map<StoreModel>(storeEntity);
-            return CreatedAtRoute("DefaultApi", new { controller= "stores", id = storeReadModel.Id }, storeReadModel);
-        }
-
-        /// <summary>
         /// Deletes store
         /// </summary>
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
-        public IHttpActionResult Delete([FromBody] int id)
+        [Route("api/stores/{id}")]
+        public IHttpActionResult Delete([FromUri] int id)
         {
             Database<Store>.Delete(id);
             return Ok();
