@@ -7,7 +7,7 @@ using BookStoreApiService.Models;
 
 namespace BookStoreApiService.Data
 {
-    public static class Database<T> where T: Entity, new() 
+    public static class Database<T> where T : Entity, new()
     {
         private static readonly Dictionary<int, T> _data = new Dictionary<int, T>();
 
@@ -38,6 +38,9 @@ namespace BookStoreApiService.Data
 
         public static void Delete(int id)
         {
+            if (!_data.ContainsKey(id))
+                throw new DataNotFoundException();
+
             _data.Remove(id);
         }
 
