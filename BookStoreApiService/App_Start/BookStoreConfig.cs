@@ -27,9 +27,9 @@ namespace BookStoreApiService.App_Start
                 cfg.CreateMap<AuthorModel, Author>();
                 cfg.CreateMap<AuthorCreateModel, Author>();
 
-                cfg.CreateMap<Book, BookModel>();
+                cfg.CreateMap<Book, BookReadModel>();
                 cfg.CreateMap<Book, BookCreateModel>();
-                cfg.CreateMap<BookModel, Book>();
+                cfg.CreateMap<BookReadModel, Book>();
                 cfg.CreateMap<BookCreateModel, Book>();
 
                 cfg.CreateMap<Store, StoreReadModel>();
