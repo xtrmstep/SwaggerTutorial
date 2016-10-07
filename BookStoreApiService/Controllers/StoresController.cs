@@ -50,7 +50,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="store">Store model</param>
         /// <returns></returns>
         [ResponseType(typeof(StoreReadModel))]
-        public IHttpActionResult Post([FromBody] StoreWriteModel store)
+        public IHttpActionResult Post([FromBody] StoreCreateModel store)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
@@ -68,15 +68,17 @@ namespace BookStoreApiService.Controllers
         /// <param name="store">Store model</param>
         /// <returns></returns>
         [Route("api/stores/{id}")]
-        public IHttpActionResult Put([FromUri]int id, [FromBody] StoreWriteModel store)
+        public IHttpActionResult Put(int id, [FromBody] StoreUpdateModel store)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, store, out badRequest)) return badRequest;
 
             try
             {
-                var storeEntity = Mapper.Map<Store>(store);
-                storeEntity.Id = id;
+                var storeEntity = Database<Store>.Read(id);
+                if (storeEntity == null) return NotFound();
+
+                Mapper.Map(store, storeEntity);
                 Database<Store>.Update(storeEntity);
                 return Ok();
             }
@@ -92,10 +94,17 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
         [Route("api/stores/{id}")]
-        public IHttpActionResult Delete([FromUri] int id)
+        public IHttpActionResult Delete(int id)
         {
-            Database<Store>.Delete(id);
-            return Ok();
+            try
+            {
+                Database<Store>.Delete(id);
+                return Ok();
+            }
+            catch (DataNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

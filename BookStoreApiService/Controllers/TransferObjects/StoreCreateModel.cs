@@ -5,7 +5,7 @@ namespace BookStoreApiService.Controllers.TransferObjects
     /// <summary>
     /// Data transfer object to create or update stores
     /// </summary>
-    public class StoreWriteModel
+    public class StoreCreateModel
     {
         /// <summary>
         /// Store name
@@ -16,7 +16,6 @@ namespace BookStoreApiService.Controllers.TransferObjects
         /// <summary>
         /// Store address
         /// </summary>
-        [Required]
         public string Address { get; set; }
     }
 }

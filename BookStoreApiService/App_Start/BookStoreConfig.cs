@@ -33,9 +33,12 @@ namespace BookStoreApiService.App_Start
                 cfg.CreateMap<BookCreateModel, Book>();
 
                 cfg.CreateMap<Store, StoreReadModel>();
-                cfg.CreateMap<Store, StoreWriteModel>();
+                cfg.CreateMap<Store, StoreUpdateModel>();
                 cfg.CreateMap<StoreReadModel, Store>();
-                cfg.CreateMap<StoreWriteModel, Store>();
+                cfg.CreateMap<StoreUpdateModel, Store>()
+                    // copy value from Src member to Dest if it is not NULL
+                    .ForMember(dest => dest.Name, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Name != null) dest.Name = src.Name; })
+                    .ForMember(dest => dest.Address, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Address != null) dest.Address = src.Address; });
             });
         }
     }
