@@ -110,7 +110,8 @@
     <Compile Include="Controllers\Helpers\ControllerHelpers.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
-    <Compile Include="Controllers\TransferObjects\AuthorModel.cs" />
+    <Compile Include="Controllers\TransferObjects\AuthorUpdateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\AuthorReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookUpdateModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookReadModel.cs" />
