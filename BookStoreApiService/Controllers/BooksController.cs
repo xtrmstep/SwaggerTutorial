@@ -2,10 +2,12 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.UI;
+using AutoMapper;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
 using BookStoreApiService.Controllers.Helpers;
+using BookStoreApiService.Controllers.TransferObjects;
 
 namespace BookStoreApiService.Controllers
 {
@@ -19,11 +21,12 @@ namespace BookStoreApiService.Controllers
         /// Returns a list of books
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<Book>))]
+        [ResponseType(typeof(IList<BookModel>))]
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
-            return Ok(listOfBooks);
+            var books = Mapper.Map<List<BookModel>>(listOfBooks);
+            return Ok(books);
         }
 
         /// <summary>
@@ -32,10 +35,13 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
         [Route("api/books/{id}")]
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookModel))]
         public IHttpActionResult Get(int id)
         {
-            var book = Database<Book>.Read(id);
+            var bookEntity = Database<Book>.Read(id);
+            if (bookEntity == null) return NotFound();
+
+            var book = Mapper.Map<BookModel>(bookEntity);
             return Ok(book);
         }
 
@@ -44,14 +50,15 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
-        public IHttpActionResult Post([FromBody] Book book)
+        public IHttpActionResult Post([FromBody] BookModel book)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
 
             try
             {
-                Database<Book>.Update(book);
+                var bookEntity = Mapper.Map<Book>(book);
+                Database<Book>.Update(bookEntity);
                 return Ok();
             }
             catch (DataNotFoundException)
@@ -65,14 +72,16 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult Put([FromBody]Book book)
+        [ResponseType(typeof(BookModel))]
+        public IHttpActionResult Put([FromBody]BookCreateModel book)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
 
-            Database<Book>.Create(book);
-            return CreatedAtRoute("DefaultApi", new { controller = "books", id = book.Id }, book);
+            var bookEntity = Mapper.Map<Book>(book);
+            Database<Book>.Create(bookEntity);
+            var bookReadModel = Mapper.Map<BookModel>(bookEntity);
+            return CreatedAtRoute("DefaultApi", new { controller = "books", id = bookReadModel.Id }, bookReadModel);
         }
 
         /// <summary>

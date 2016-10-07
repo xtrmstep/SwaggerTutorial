@@ -6,15 +6,11 @@ using Newtonsoft.Json;
 
 namespace BookStoreApiService.Models
 {
-    [Serializable]
-    [DataContract(IsReference = true)]
     public class Author : Entity
     {
         /// <summary>
         /// Author full name
         /// </summary>
-        [DataMember]
-        [Required]
         public string Name { get; set; }
 
         /// <summary>

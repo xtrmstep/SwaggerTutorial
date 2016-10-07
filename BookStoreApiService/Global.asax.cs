@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
+using AutoMapper;
+using BookStoreApiService.App_Start;
+using BookStoreApiService.Models;
 
 namespace BookStoreApiService
 {
@@ -13,8 +16,7 @@ namespace BookStoreApiService
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
-            DatabaseSeed.Init();
+            BookStoreConfig.Register();
         }
     }
 }
