@@ -96,8 +96,15 @@ namespace BookStoreApiService.Controllers
         [Route("api/books/{id}")]
         public IHttpActionResult Delete(int id)
         {
-            Database<Book>.Delete(id);
-            return Ok();
+            try
+            {
+                Database<Book>.Delete(id);
+                return Ok();
+            }
+            catch (DataNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
