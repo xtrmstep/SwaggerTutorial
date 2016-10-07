@@ -2,7 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookStoreApiService.Controllers.TransferObjects
 {
-    public class StoreCreateModel
+    /// <summary>
+    /// Data transfer object to create or update stores
+    /// </summary>
+    public class StoreWriteModel
     {
         /// <summary>
         /// Store name

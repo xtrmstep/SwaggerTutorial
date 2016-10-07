@@ -32,10 +32,10 @@ namespace BookStoreApiService.App_Start
                 cfg.CreateMap<BookModel, Book>();
                 cfg.CreateMap<BookCreateModel, Book>();
 
-                cfg.CreateMap<Store, StoreModel>();
-                cfg.CreateMap<Store, StoreCreateModel>();
-                cfg.CreateMap<StoreModel, Store>();
-                cfg.CreateMap<StoreCreateModel, Store>();
+                cfg.CreateMap<Store, StoreReadModel>();
+                cfg.CreateMap<Store, StoreWriteModel>();
+                cfg.CreateMap<StoreReadModel, Store>();
+                cfg.CreateMap<StoreWriteModel, Store>();
             });
         }
     }
