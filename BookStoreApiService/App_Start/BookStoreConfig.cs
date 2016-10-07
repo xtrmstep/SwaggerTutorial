@@ -22,9 +22,9 @@ namespace BookStoreApiService.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Author, AuthorModel>();
+                cfg.CreateMap<Author, AuthorReadModel>();
                 cfg.CreateMap<Author, AuthorCreateModel>();
-                cfg.CreateMap<AuthorModel, Author>();
+                cfg.CreateMap<AuthorReadModel, Author>();
                 cfg.CreateMap<AuthorCreateModel, Author>();
 
                 cfg.CreateMap<Book, BookReadModel>();
