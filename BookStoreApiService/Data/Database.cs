@@ -28,6 +28,11 @@ namespace BookStoreApiService.Data
             return _data.Values.ToList();
         }
 
+        /// <summary>
+        /// Updates the existing data
+        /// </summary>
+        /// <param name="entity">Existing data which shall be updated using its ID</param>
+        /// <exception cref="DataNotFoundException">Raised when data cannot be found by the identifier</exception>
         public static void Update(T entity)
         {
             if (_data.ContainsKey(entity.Id))
