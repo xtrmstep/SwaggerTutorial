@@ -34,6 +34,8 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
+        /// <response code="200">OK</response>
+        /// <response code="404">Not Found: book with the identifier is not found</response>
         [Route("api/books/{id}")]
         [ResponseType(typeof(BookReadModel))]
         public IHttpActionResult Get(int id)
@@ -50,6 +52,8 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
+        /// <response code="201">Created</response>
+        /// <response code="400">Bad Request: the sent data is not valid</response>
         [ResponseType(typeof (BookReadModel))]
         public IHttpActionResult Post([FromBody] BookCreateModel book)
         {
@@ -68,6 +72,9 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Book identifier</param>
         /// <param name="book">Book model</param>
         /// <returns></returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request: the sent data is not valid</response>
+        /// <response code="404">Not Found: book with the identifier is not found</response>
         [Route("api/books/{id}")]
         public IHttpActionResult Put(int id, [FromBody]BookUpdateModel book)
         {
@@ -93,6 +100,8 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
+        /// <response code="200">OK</response>
+        /// <response code="404">Not Found: book with the identifier is not found</response>
         [Route("api/books/{id}")]
         public IHttpActionResult Delete(int id)
         {
