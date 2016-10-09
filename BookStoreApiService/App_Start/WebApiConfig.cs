@@ -13,7 +13,7 @@ namespace BookStoreApiService
         {
             // Web API configuration and services
             //config.MessageHandlers.Add(new MandatoryHeadersHandler());
-            config.Filters.Add(new BasicAuthenticationFilter());
+            //config.Filters.Add(new BasicAuthenticationFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

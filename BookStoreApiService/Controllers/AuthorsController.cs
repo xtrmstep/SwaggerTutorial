@@ -9,6 +9,7 @@ using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Controllers.Helpers;
 using BookStoreApiService.Controllers.TransferObjects;
+using BookStoreApiService.Controllers.ActionFilters;
 
 namespace BookStoreApiService.Controllers
 {
@@ -16,6 +17,7 @@ namespace BookStoreApiService.Controllers
     /// Represents authors
     /// </summary>
     [Authorize]
+    [BasicAuthenticationFilter]
     [Route("api/authors")]
     public class AuthorsController : ApiController
     {

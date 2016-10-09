@@ -8,7 +8,7 @@ using System.Web.Http.Filters;
 
 namespace BookStoreApiService.Controllers.ActionFilters
 {
-    public class BasicAuthenticationFilter : IAuthenticationFilter
+    public class BasicAuthenticationFilter : Attribute, IAuthenticationFilter
     {
         private const string ALLOWED_SCHEME = "Basic";
         private const string USER_NAME = "Swagger";
@@ -25,7 +25,8 @@ namespace BookStoreApiService.Controllers.ActionFilters
             var authorization = request.Headers.Authorization;
 
             // allow only for Basic authorization schema
-            if (authorization.Scheme != ALLOWED_SCHEME) return Task.CompletedTask;
+            if (authorization == null || authorization.Scheme != ALLOWED_SCHEME)
+                return Task.CompletedTask;
 
             #region authorization parameters must exist
 
