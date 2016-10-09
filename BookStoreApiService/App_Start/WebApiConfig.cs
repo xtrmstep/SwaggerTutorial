@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using BookStoreApiService.HttpHandlers;
 
 namespace BookStoreApiService
 {
@@ -10,6 +11,7 @@ namespace BookStoreApiService
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Add(new MandatoryHeadersHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
