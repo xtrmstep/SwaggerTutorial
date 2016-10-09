@@ -106,6 +106,9 @@
     <Compile Include="App_Start\BookStoreConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActionFilters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Controllers\ActionFilters\AuthenticationFailureResult.cs" />
+    <Compile Include="Controllers\ActionFilters\BasicAuthenticationFilter.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\Helpers\ControllerHelpers.cs" />
     <Compile Include="Controllers\StoresController.cs" />
