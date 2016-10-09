@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpHandlers\MandatoryHeadersHandler.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
