@@ -26,6 +26,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <returns></returns>
         [ResponseType(typeof(IList<AuthorReadModel>))]
+        [AllowAnonymous]
         public IHttpActionResult Get()
         {
             var listOfAuthors = Database<Author>.Read();

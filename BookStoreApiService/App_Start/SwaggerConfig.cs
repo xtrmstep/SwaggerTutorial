@@ -3,6 +3,8 @@ using WebActivatorEx;
 using BookStoreApiService;
 using Swashbuckle.Application;
 using System;
+using BookStoreApiService.SwaggerHelpers;
+using BookStoreApiService.SwaggerHelpers.OperationFilters;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -55,8 +57,7 @@ namespace BookStoreApiService
                         // you'll need to implement a custom IDocumentFilter and/or IOperationFilter to set these properties
                         // according to your specific authorization implementation
                         //
-                        //c.BasicAuth("basic")
-                        //    .Description("Basic HTTP Authentication");
+                        c.BasicAuth("basic").Description("Basic HTTP Authentication");
                         //
 						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
@@ -154,6 +155,9 @@ namespace BookStoreApiService
                         // to execute the operation
                         //
                         //c.OperationFilter<AssignOAuth2SecurityRequirements>();
+
+                        c.OperationFilter<MarkSecuredMethods>();
+                        //c.OperationFilter<AddAuthorizationHeaderParameter>();
 
                         // Post-modify the entire Swagger document by wiring up one or more Document filters.
                         // This gives full control to modify the final SwaggerDocument. You should have a good understanding of
