@@ -24,19 +24,24 @@ namespace BookStoreApiService.App_Start
             {
                 cfg.CreateMap<Author, AuthorReadModel>();
                 cfg.CreateMap<Author, AuthorCreateModel>();
-                cfg.CreateMap<AuthorReadModel, Author>();
+                cfg.CreateMap<Author, AuthorUpdateModel>();
                 cfg.CreateMap<AuthorCreateModel, Author>();
+                cfg.CreateMap<AuthorUpdateModel, Author>()
+                    // copy value from Src member to Dest if it is not NULL
+                    .ForMember(dest => dest.Name, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Name != null) dest.Name = src.Name; });
 
                 cfg.CreateMap<Book, BookReadModel>();
                 cfg.CreateMap<Book, BookCreateModel>();
-                cfg.CreateMap<BookReadModel, Book>();
+                cfg.CreateMap<Book, BookUpdateModel>();
                 cfg.CreateMap<BookCreateModel, Book>();
+                cfg.CreateMap<BookUpdateModel, Book>()
+                    .ForMember(dest => dest.Title, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Title != null) dest.Title = src.Title; });
 
                 cfg.CreateMap<Store, StoreReadModel>();
+                cfg.CreateMap<Store, StoreCreateModel>();
                 cfg.CreateMap<Store, StoreUpdateModel>();
-                cfg.CreateMap<StoreReadModel, Store>();
+                cfg.CreateMap<StoreCreateModel, Store>();
                 cfg.CreateMap<StoreUpdateModel, Store>()
-                    // copy value from Src member to Dest if it is not NULL
                     .ForMember(dest => dest.Name, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Name != null) dest.Name = src.Name; })
                     .ForMember(dest => dest.Address, opt => opt.Ignore()).AfterMap((src, dest) => { if (src.Address != null) dest.Address = src.Address; });
             });
