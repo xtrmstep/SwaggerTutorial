@@ -134,6 +134,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SwaggerHelpers\OperationFilters\AddAuthResponseCodes.cs" />
     <Compile Include="SwaggerHelpers\OperationFilters\MarkSecuredMethods.cs" />
     <Compile Include="SwaggerHelpers\OperationFilters\AddAuthorizationHeaderParameter.cs" />
   </ItemGroup>
