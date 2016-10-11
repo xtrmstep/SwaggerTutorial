@@ -139,6 +139,7 @@
     <Compile Include="SwaggerHelpers\Filters\MarkSecuredMethods.cs" />
     <Compile Include="SwaggerHelpers\Filters\AddAuthorizationHeaderParameter.cs" />
     <Compile Include="SwaggerHelpers\Filters\MultipleOperationsWithSameVerbFilter.cs" />
+    <Compile Include="SwaggerHelpers\Filters\SwaggerGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
