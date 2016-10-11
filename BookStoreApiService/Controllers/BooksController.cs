@@ -15,8 +15,8 @@ namespace BookStoreApiService.Controllers
     /// <summary>
     /// Represents books
     /// </summary>
-    [Authorize]
-    [BasicAuthenticationFilter]
+    //[Authorize]
+    //[BasicAuthenticationFilter]
     [Route("api/books")]
     public class BooksController : ApiController
     {
