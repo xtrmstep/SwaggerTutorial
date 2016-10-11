@@ -8,7 +8,7 @@ using System.Web.Http.Filters;
 
 namespace BookStoreApiService.Controllers.ActionFilters
 {
-    public class BasicAuthenticationFilter : IAuthenticationFilter
+    public class BasicAuthenticationFilter : Attribute, IAuthenticationFilter
     {
         private const string ALLOWED_SCHEME = "Basic";
         private const string USER_NAME = "Swagger";
@@ -17,15 +17,29 @@ namespace BookStoreApiService.Controllers.ActionFilters
         private const string INVALID_CREDENTIALS = "Invalid credentials";
         private const string INVALID_USER_OR_PASSWORD = "Invalid user or password";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether more than one instance of the indicated attribute can be specified for a single program element.
+        /// </summary>
+        /// <returns>
+        /// true if more than one instance is allowed to be specified; otherwise, false. The default is false.
+        /// </returns>
         public bool AllowMultiple => false; // note: I don't know why it is False. Saw on some examples.
 
+        /// <summary>
+        /// Authenticates the request.
+        /// </summary>
+        /// <returns>
+        /// A Task that will perform authentication.
+        /// </returns>
+        /// <param name="context">The authentication context.</param><param name="cancellationToken">The token to monitor for cancellation requests.</param>
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;
             var authorization = request.Headers.Authorization;
 
             // allow only for Basic authorization schema
-            if (authorization.Scheme != ALLOWED_SCHEME) return Task.CompletedTask;
+            if (authorization == null || authorization.Scheme != ALLOWED_SCHEME)
+                return Task.CompletedTask;
 
             #region authorization parameters must exist
 

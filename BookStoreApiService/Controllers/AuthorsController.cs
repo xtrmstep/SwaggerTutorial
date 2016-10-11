@@ -9,13 +9,15 @@ using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Controllers.Helpers;
 using BookStoreApiService.Controllers.TransferObjects;
+using BookStoreApiService.Controllers.ActionFilters;
 
 namespace BookStoreApiService.Controllers
 {
     /// <summary>
     /// Represents authors
     /// </summary>
-    [Authorize]
+    //[Authorize]
+    //[BasicAuthenticationFilter]
     [Route("api/authors")]
     public class AuthorsController : ApiController
     {
@@ -24,6 +26,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <returns></returns>
         [ResponseType(typeof(IList<AuthorReadModel>))]
+        [AllowAnonymous]
         public IHttpActionResult Get()
         {
             var listOfAuthors = Database<Author>.Read();

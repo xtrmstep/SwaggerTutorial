@@ -12,14 +12,28 @@ namespace BookStoreApiService.HttpHandlers
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (_mandatoryHeaders.All(request.Headers.Contains) == false)
-                return BadRequestAsync("Missing required headers");
+            string xOrg;
+            string xVersion;
+            string xUserId;
 
-            var xOrg = request.Headers.GetValues("X-Org").First();
-            var xVersion = request.Headers.GetValues("X-Version").First();
-            var xUserId = request.Headers.GetValues("X-UserId").First();
+            if (request.RequestUri.ToString().Contains("swagger"))
+            {
+                xOrg = "SwaggerTest";
+                xVersion = "1";
+                xUserId = "Test";
+            }
+            else
+            {
+                if (_mandatoryHeaders.All(request.Headers.Contains) == false)
+                    return BadRequestAsync("Missing required headers");
 
-            if(xOrg != "SwaggerTest")
+
+                xOrg = request.Headers.GetValues("X-Org").First();
+                xVersion = request.Headers.GetValues("X-Version").First();
+                xUserId = request.Headers.GetValues("X-UserId").First();
+            }
+
+            if (xOrg != "SwaggerTest")
                 return BadRequestAsync("Wrong X-Org value. It should be 'SwaggerTest'.");
 
             if (xVersion != "1")

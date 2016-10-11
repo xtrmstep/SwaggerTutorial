@@ -2,6 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoMapper;
+using BookStoreApiService.Controllers.ActionFilters;
 using BookStoreApiService.Models;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
@@ -13,7 +14,8 @@ namespace BookStoreApiService.Controllers
     /// <summary>
     /// Represents stores
     /// </summary>
-    [Authorize]
+    //[Authorize]
+    //[BasicAuthenticationFilter]
     [Route("api/stores")]
     public class StoresController : ApiController
     {
