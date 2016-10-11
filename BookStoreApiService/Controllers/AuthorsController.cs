@@ -1,31 +1,28 @@
 ﻿using System.Collections.Generic;
-using BookStoreApiService.Models;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
-using System.Web.Http.Validation;
 using AutoMapper;
-using BookStoreApiService.Data;
-using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Controllers.Helpers;
 using BookStoreApiService.Controllers.TransferObjects;
-using BookStoreApiService.Controllers.ActionFilters;
+using BookStoreApiService.Data;
+using BookStoreApiService.Data.Exceptions;
+using BookStoreApiService.Models;
 
 namespace BookStoreApiService.Controllers
 {
     /// <summary>
-    /// Represents authors
+    ///     Represents authors
     /// </summary>
     //[Authorize]
     //[BasicAuthenticationFilter]
-    [Route("api/authors")]
+    [RoutePrefix("api")]
     public class AuthorsController : ApiController
     {
         /// <summary>
-        /// Returns a list of authors
+        ///     Returns a list of authors
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<AuthorReadModel>))]
+        [ResponseType(typeof (IList<AuthorReadModel>))]
         [AllowAnonymous]
         public IHttpActionResult Get()
         {
@@ -35,14 +32,13 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Returns an author
+        ///     Returns an author
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
         /// <response code="200">OK</response>
         /// <response code="404">Not Found: author with the identifier is not found</response>
-        [Route("api/authors/{id}")]
-        [ResponseType(typeof(AuthorReadModel))]
+        [ResponseType(typeof (AuthorReadModel))]
         public IHttpActionResult Get(int id)
         {
             var authorEntity = Database<Author>.Read(id);
@@ -53,13 +49,13 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Creates an author
+        ///     Creates an author
         /// </summary>
         /// <param name="author">Author model</param>
         /// <returns></returns>
         /// <response code="201">Created</response>
         /// <response code="400">Bad Request: the sent data is not valid</response>
-        [ResponseType(typeof(AuthorReadModel))]
+        [ResponseType(typeof (AuthorReadModel))]
         public IHttpActionResult Post([FromBody] AuthorCreateModel author)
         {
             IHttpActionResult badRequest;
@@ -68,11 +64,11 @@ namespace BookStoreApiService.Controllers
             var authorEntity = Mapper.Map<Author>(author);
             Database<Author>.Create(authorEntity);
             var authorReadModel = Mapper.Map<AuthorReadModel>(authorEntity);
-            return CreatedAtRoute("DefaultApi", new { controller = "author", id = authorReadModel.Id }, authorReadModel);
+            return CreatedAtRoute("DefaultApi", new {controller = "author", id = authorReadModel.Id}, authorReadModel);
         }
 
         /// <summary>
-        /// Updates an author
+        ///     Updates an author
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <param name="author">Author model</param>
@@ -80,7 +76,6 @@ namespace BookStoreApiService.Controllers
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request: the sent data is not valid</response>
         /// <response code="404">Not Found: author with the identifier is not found</response>
-        [Route("api/authors/{id}")]
         public IHttpActionResult Put(int id, [FromBody] AuthorUpdateModel author)
         {
             IHttpActionResult badRequest;
@@ -95,20 +90,18 @@ namespace BookStoreApiService.Controllers
                 Database<Author>.Update(authorEntity);
                 return Ok();
             }
-            catch (DataNotFoundException)
-            {
+            catch (DataNotFoundException) {
                 return NotFound();
             }
         }
 
         /// <summary>
-        /// Deletes an author
+        ///     Deletes an author
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
         /// <response code="200">OK</response>
         /// <response code="404">Not Found: author with the identifier is not found</response>
-        [Route("api/authors/{id}")]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -116,8 +109,7 @@ namespace BookStoreApiService.Controllers
                 Database<Author>.Delete(id);
                 return Ok();
             }
-            catch (DataNotFoundException)
-            {
+            catch (DataNotFoundException) {
                 return NotFound();
             }
         }
