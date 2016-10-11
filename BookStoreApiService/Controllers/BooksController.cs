@@ -1,30 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.UI;
 using AutoMapper;
-using BookStoreApiService.Controllers.ActionFilters;
+using BookStoreApiService.Controllers.Helpers;
+using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
-using BookStoreApiService.Controllers.Helpers;
-using BookStoreApiService.Controllers.TransferObjects;
 
 namespace BookStoreApiService.Controllers
 {
     /// <summary>
-    /// Represents books
+    ///     Represents books
     /// </summary>
     //[Authorize]
     //[BasicAuthenticationFilter]
-    [Route("api/books")]
+    [RoutePrefix("api")]
     public class BooksController : ApiController
     {
         /// <summary>
-        /// Returns a list of books
+        ///     Returns a list of books
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(IList<BookReadModel>))]
+        [ResponseType(typeof (IList<BookReadModel>))]
         public IHttpActionResult Get()
         {
             var listOfBooks = Database<Book>.Read();
@@ -33,14 +31,13 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Returns a book
+        ///     Returns a book
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
         /// <response code="200">OK</response>
         /// <response code="404">Not Found: book with the identifier is not found</response>
-        [Route("api/books/{id}")]
-        [ResponseType(typeof(BookReadModel))]
+        [ResponseType(typeof (BookReadModel))]
         public IHttpActionResult Get(int id)
         {
             var bookEntity = Database<Book>.Read(id);
@@ -51,7 +48,7 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Creates a book
+        ///     Creates a book
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
@@ -70,7 +67,7 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Updates a book
+        ///     Updates a book
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <param name="book">Book model</param>
@@ -78,8 +75,7 @@ namespace BookStoreApiService.Controllers
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request: the sent data is not valid</response>
         /// <response code="404">Not Found: book with the identifier is not found</response>
-        [Route("api/books/{id}")]
-        public IHttpActionResult Put(int id, [FromBody]BookUpdateModel book)
+        public IHttpActionResult Put(int id, [FromBody] BookUpdateModel book)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;
@@ -92,20 +88,18 @@ namespace BookStoreApiService.Controllers
                 Database<Book>.Update(bookEntity);
                 return Ok();
             }
-            catch (DataNotFoundException)
-            {
+            catch (DataNotFoundException) {
                 return NotFound();
             }
         }
 
         /// <summary>
-        /// Deletes a book
+        ///     Deletes a book
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
         /// <response code="200">OK</response>
         /// <response code="404">Not Found: book with the identifier is not found</response>
-        [Route("api/books/{id}")]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -113,8 +107,7 @@ namespace BookStoreApiService.Controllers
                 Database<Book>.Delete(id);
                 return Ok();
             }
-            catch (DataNotFoundException)
-            {
+            catch (DataNotFoundException) {
                 return NotFound();
             }
         }
