@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoMapper;
@@ -7,6 +8,7 @@ using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
+using Swashbuckle.Swagger.Annotations;
 
 namespace BookStoreApiService.Controllers
 {
@@ -35,8 +37,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="404">Not Found: store with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: store with the identifier is not found")]
         [ResponseType(typeof (StoreReadModel))]
         public IHttpActionResult Get(int id)
         {
@@ -52,8 +53,9 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="store">Store model</param>
         /// <returns></returns>
-        /// <response code="201">Created</response>
-        /// <response code="400">Bad Request: the sent data is not valid</response>
+        [SwaggerResponseRemoveDefaults]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Store is created", Type = typeof(StoreReadModel))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         [ResponseType(typeof (StoreReadModel))]
         public IHttpActionResult Post([FromBody] StoreCreateModel store)
         {
@@ -72,9 +74,8 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Store identifier</param>
         /// <param name="store">Store model</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="400">Bad Request: the sent data is not valid</response>
-        /// <response code="404">Not Found: store with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: store with the identifier is not found")]
         public IHttpActionResult Put(int id, [FromBody] StoreUpdateModel store)
         {
             IHttpActionResult badRequest;
@@ -99,8 +100,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Store identifier</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="404">Not Found: store with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: store with the identifier is not found")]
         public IHttpActionResult Delete(int id)
         {
             try
