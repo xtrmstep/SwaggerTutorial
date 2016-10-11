@@ -5,7 +5,7 @@ using Swashbuckle.Application;
 using System;
 using System.Linq;
 using BookStoreApiService.SwaggerHelpers;
-using BookStoreApiService.SwaggerHelpers.OperationFilters;
+using BookStoreApiService.SwaggerHelpers.Filters;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 

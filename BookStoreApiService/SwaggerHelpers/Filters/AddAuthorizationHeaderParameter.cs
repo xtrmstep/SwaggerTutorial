@@ -5,12 +5,12 @@ using System.Web.Http.Description;
 using System.Web.Http.Filters;
 using Swashbuckle.Swagger;
 
-namespace BookStoreApiService.SwaggerHelpers.OperationFilters
+namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     /// <summary>
     /// This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
-    public class MarkSecuredMethods : IOperationFilter
+    public class AddAuthorizationHeaderParameter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
@@ -25,15 +25,17 @@ namespace BookStoreApiService.SwaggerHelpers.OperationFilters
 
             if (isAuthorized && !allowAnonymous)
             {
-                if (operation.security == null)
-                    operation.security = new List<IDictionary<string, IEnumerable<string>>>();
+                if (operation.parameters == null)
+                    operation.parameters = new List<Parameter>();
 
-                var auth = new Dictionary<string, IEnumerable<string>>
+                operation.parameters.Add(new Parameter
                 {
-                    { "basic", Enumerable.Empty<string>()}
-                };
-
-                operation.security.Add(auth);
+                    name = "Authorization",
+                    @in = "header",
+                    description = "Basic U3dhZ2dlcjpUZXN0", // Basic Swagger:Test
+                    required = true,
+                    type = "string"
+                });
             }
         }
     }

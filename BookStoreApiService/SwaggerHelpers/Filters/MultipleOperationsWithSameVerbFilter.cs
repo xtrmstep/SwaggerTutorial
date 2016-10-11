@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http.Description;
+﻿using System.Web.Http.Description;
 using Swashbuckle.Swagger;
 
-namespace BookStoreApiService.SwaggerHelpers.OperationFilters
+namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     public class MultipleOperationsWithSameVerbFilter : IOperationFilter
     {
