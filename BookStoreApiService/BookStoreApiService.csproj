@@ -137,7 +137,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwaggerHelpers\ConflictingActionsResolver.cs" />
     <Compile Include="SwaggerHelpers\Filters\AddAuthResponseCodesOperationFilter.cs" />
-    <Compile Include="SwaggerHelpers\Filters\MultiOperationDocumentFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\MarkSecuredMethodsOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\AddAuthorizationHeaderParameterOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\MultiOperationSwaggerGenerator.cs" />
