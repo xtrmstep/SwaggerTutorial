@@ -157,8 +157,7 @@ namespace BookStoreApiService
                         //
                         //c.OperationFilter<AssignOAuth2SecurityRequirements>();
 
-                        c.OperationFilter<AddAuthResponseCodes>();
-                        c.OperationFilter<MultipleOperationsWithSameVerbFilter>();
+                        c.OperationFilter<AddAuthResponseCodesOperationFilter>();
                         //c.OperationFilter<MarkSecuredMethods>();
                         //c.OperationFilter<AddAuthorizationHeaderParameter>();
 

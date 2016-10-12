@@ -7,7 +7,7 @@ using Swashbuckle.Swagger;
 
 namespace BookStoreApiService.SwaggerHelpers.Filters
 {
-    public class DocumentFilter : IDocumentFilter
+    public class MultiOperationDocumentFilter : IDocumentFilter
     {
         public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
         {

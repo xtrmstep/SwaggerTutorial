@@ -10,7 +10,7 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
     /// <summary>
     /// This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
-    public class AddAuthResponseCodes : IOperationFilter
+    public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
@@ -25,12 +25,17 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
 
             if (isAuthorized && !allowAnonymous)
             {
-                #region add 401 response code to secured methods
-                if (operation.responses == null)
-                    operation.responses = new Dictionary<string, Response>();
-                if (!operation.responses.ContainsKey("401"))
-                    operation.responses.Add("401", new Response { description = "Unauthorized" }); 
-                #endregion
+                if (operation.parameters == null)
+                    operation.parameters = new List<Parameter>();
+
+                operation.parameters.Add(new Parameter
+                {
+                    name = "Authorization",
+                    @in = "header",
+                    description = "Basic U3dhZ2dlcjpUZXN0", // Basic Swagger:Test
+                    required = true,
+                    type = "string"
+                });
             }
         }
     }

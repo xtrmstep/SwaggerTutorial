@@ -10,7 +10,7 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
     /// <summary>
     /// This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
-    public class AddAuthorizationHeaderParameter : IOperationFilter
+    public class MarkSecuredMethodsOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
@@ -25,17 +25,15 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
 
             if (isAuthorized && !allowAnonymous)
             {
-                if (operation.parameters == null)
-                    operation.parameters = new List<Parameter>();
+                if (operation.security == null)
+                    operation.security = new List<IDictionary<string, IEnumerable<string>>>();
 
-                operation.parameters.Add(new Parameter
+                var auth = new Dictionary<string, IEnumerable<string>>
                 {
-                    name = "Authorization",
-                    @in = "header",
-                    description = "Basic U3dhZ2dlcjpUZXN0", // Basic Swagger:Test
-                    required = true,
-                    type = "string"
-                });
+                    { "basic", Enumerable.Empty<string>()}
+                };
+
+                operation.security.Add(auth);
             }
         }
     }
