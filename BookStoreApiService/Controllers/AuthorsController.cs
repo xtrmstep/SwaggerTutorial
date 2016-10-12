@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Filters;
 using AutoMapper;
 using BookStoreApiService.Controllers.Helpers;
 using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
+using Swashbuckle.Swagger.Annotations;
 
 namespace BookStoreApiService.Controllers
 {
@@ -32,12 +37,28 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
+        /// Returns a list of authors
+        /// </summary>
+        /// <param name="count">Number of items to return</param>
+        /// <param name="descending">If True the items will be sorted in the reverse alphabetic order</param>
+        /// <returns></returns>
+        [ResponseType(typeof(IList<AuthorReadModel>))]
+        [AllowAnonymous]
+        public IHttpActionResult Get(int count, bool descending)
+        {
+            var listOfAuthors = Database<Author>.Read();
+            var authors = Mapper.Map<List<AuthorReadModel>>(listOfAuthors).Take(count);
+            if (descending)
+                authors = authors.OrderByDescending(a => a.Name);
+            return Ok(authors.ToList());
+        }
+
+        /// <summary>
         ///     Returns an author
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="404">Not Found: author with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         [ResponseType(typeof (AuthorReadModel))]
         public IHttpActionResult Get(int id)
         {
@@ -53,9 +74,9 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="author">Author model</param>
         /// <returns></returns>
-        /// <response code="201">Created</response>
-        /// <response code="400">Bad Request: the sent data is not valid</response>
-        [ResponseType(typeof (AuthorReadModel))]
+        [SwaggerResponseRemoveDefaults]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Author is created", Type = typeof(AuthorReadModel))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         public IHttpActionResult Post([FromBody] AuthorCreateModel author)
         {
             IHttpActionResult badRequest;
@@ -73,9 +94,8 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Author identifier</param>
         /// <param name="author">Author model</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="400">Bad Request: the sent data is not valid</response>
-        /// <response code="404">Not Found: author with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         public IHttpActionResult Put(int id, [FromBody] AuthorUpdateModel author)
         {
             IHttpActionResult badRequest;
@@ -100,8 +120,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
-        /// <response code="200">OK</response>
-        /// <response code="404">Not Found: author with the identifier is not found</response>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         public IHttpActionResult Delete(int id)
         {
             try

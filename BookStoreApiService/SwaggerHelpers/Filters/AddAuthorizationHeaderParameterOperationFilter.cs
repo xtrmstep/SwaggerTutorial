@@ -5,12 +5,12 @@ using System.Web.Http.Description;
 using System.Web.Http.Filters;
 using Swashbuckle.Swagger;
 
-namespace BookStoreApiService.SwaggerHelpers.OperationFilters
+namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     /// <summary>
     /// This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
-    public class AddAuthorizationHeaderParameter : IOperationFilter
+    public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
