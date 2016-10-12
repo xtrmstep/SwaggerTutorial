@@ -47,8 +47,8 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
             var paths = GetApiDescriptionsFor(apiVersion)
                 .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
                 .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
-                //.GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
-                .GroupBy(apiDesc => apiDesc.RelativePath)
+                //.GroupBy(apiDesc => apiDesc.RelativePathSansQueryString()) the code line from the original source
+                .GroupBy(apiDesc => apiDesc.RelativePath) // this line will give action name with parameters, but this is violation of Swagger 2.0 specification
                 .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry));
 
             var rootUri = new Uri(rootUrl);
