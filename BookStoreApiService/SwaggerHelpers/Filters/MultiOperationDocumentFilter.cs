@@ -11,19 +11,19 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
     {
         public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
         {
-            var paths = apiExplorer.ApiDescriptions
-                .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
-                .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
-                .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
-                .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry));
+            //var paths = apiExplorer.ApiDescriptions
+            //    .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
+            //    .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
+            //    .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
+            //    .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry));
 
-            foreach (var apiDescription in apiExplorer.ApiDescriptions)
-            {
-                foreach (var path in swaggerDoc.paths)
-                {
+            //foreach (var apiDescription in apiExplorer.ApiDescriptions)
+            //{
+            //    foreach (var path in swaggerDoc.paths)
+            //    {
                     
-                }
-            }
+            //    }
+            //}
         }
     }
 }
