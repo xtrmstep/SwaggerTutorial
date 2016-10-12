@@ -9,14 +9,14 @@ using Swashbuckle.Swagger;
 
 namespace BookStoreApiService.SwaggerHelpers.Filters
 {
-    public class SwaggerGeneratorExt : ISwaggerProvider
+    public class MultiOperationSwaggerGenerator : ISwaggerProvider
     {
         private readonly IApiExplorer _apiExplorer;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly IDictionary<string, Info> _apiVersions;
         private readonly SwaggerGeneratorOptions _options;
 
-        public SwaggerGeneratorExt(ISwaggerProvider sp)
+        public MultiOperationSwaggerGenerator(ISwaggerProvider sp)
         {
             var sg = (SwaggerGenerator)sp;
             var privateFields = sg.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);

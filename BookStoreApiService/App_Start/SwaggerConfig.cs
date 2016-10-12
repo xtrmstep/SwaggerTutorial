@@ -3,7 +3,11 @@ using WebActivatorEx;
 using BookStoreApiService;
 using Swashbuckle.Application;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Web.Http.Controllers;
+using System.Web.Http.Description;
 using BookStoreApiService.SwaggerHelpers;
 using BookStoreApiService.SwaggerHelpers.Filters;
 
@@ -173,22 +177,13 @@ namespace BookStoreApiService
                         // with the same path (sans query string) and HTTP method. You can workaround this by providing a
                         // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs 
                         //
-                        //c.ResolveConflictingActions(apiDescriptions =>
-                        //{
-                        //    var first = apiDescriptions.First();
-                        //    //foreach (var method in apiDescriptions.Skip(1))
-                        //    //    foreach (var param in method.ParameterDescriptions)
-                        //    //        if (first.ParameterDescriptions.All(x => x.Name != param.Name))
-                        //    //            first.ParameterDescriptions.Add(param);
-
-                        //    return first;
-                        //});
+                        c.ResolveConflictingActions(ConflictingActionsResolver.MergeConflictingActions());
 
                         // Wrap the default SwaggerGenerator with additional behavior (e.g. caching) or provide an
                         // alternative implementation for ISwaggerProvider with the CustomProvider option.
                         //
                         //c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
-                        c.CustomProvider(defaultProvider => new SwaggerGeneratorExt(defaultProvider));
+                        //c.CustomProvider(defaultProvider => new MultiOperationSwaggerGenerator(defaultProvider));
                     })
                 .EnableSwaggerUi(c =>
                     {
