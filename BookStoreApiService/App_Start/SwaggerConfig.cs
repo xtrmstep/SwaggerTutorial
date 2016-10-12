@@ -189,7 +189,7 @@ namespace BookStoreApiService
                         // alternative implementation for ISwaggerProvider with the CustomProvider option.
                         //
                         //c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
-                        //c.CustomProvider((defaultProvider) => new SwaggerGeneratorExt(defaultProvider));
+                        c.CustomProvider(defaultProvider => new SwaggerGeneratorExt(defaultProvider));
                     })
                 .EnableSwaggerUi(c =>
                     {
