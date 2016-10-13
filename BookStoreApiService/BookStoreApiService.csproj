@@ -141,6 +141,7 @@
     <Compile Include="SwaggerHelpers\Filters\MarkSecuredMethodsOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\AddAuthorizationHeaderParameterOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\MultiOperationSwaggerGenerator.cs" />
+    <Compile Include="SwaggerHelpers\Filters\RemoveNonJsonResponsesOperationFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
