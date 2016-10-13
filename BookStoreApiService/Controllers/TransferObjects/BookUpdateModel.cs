@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BookStoreApiService.Controllers.TransferObjects
+﻿namespace BookStoreApiService.Controllers.TransferObjects
 {
     public class BookUpdateModel
     {
         /// <summary>
-        /// Book title 
+        ///     Book title
         /// </summary>
         public string Title { get; set; }
     }

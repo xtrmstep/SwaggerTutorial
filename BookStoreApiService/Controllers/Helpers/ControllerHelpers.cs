@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Text;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.Results;
-using BookStoreApiService.Models;
 
 namespace BookStoreApiService.Controllers.Helpers
 {
     /// <summary>
-    /// Helper for controllers
+    ///     Helper for controllers
     /// </summary>
     public static class ControllerHelpers
     {
         /// <summary>
-        /// Returns true if the model is valid. If not, the out parameter <paramref name="badRequest"/> will have value of appropriate BadRequest result.
+        ///     Returns true if the model is valid. If not, the out parameter <paramref name="badRequest" /> will have value of
+        ///     appropriate BadRequest result.
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="controller"></param>
@@ -24,7 +20,7 @@ namespace BookStoreApiService.Controllers.Helpers
         /// <param name="entity"></param>
         /// <param name="badRequest"></param>
         /// <returns></returns>
-        public static bool IsModelValid<T>(this ApiController controller, ModelStateDictionary modelState, T entity, out IHttpActionResult badRequest) where T: class
+        public static bool IsModelValid<T>(this ApiController controller, ModelStateDictionary modelState, T entity, out IHttpActionResult badRequest) where T : class
         {
             badRequest = null;
             if (entity == null)
@@ -40,7 +36,7 @@ namespace BookStoreApiService.Controllers.Helpers
         }
 
         /// <summary>
-        /// Returns plain text which represents model sate errors
+        ///     Returns plain text which represents model sate errors
         /// </summary>
         /// <param name="modelState"></param>
         /// <returns></returns>

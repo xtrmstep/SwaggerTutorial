@@ -5,7 +5,7 @@ namespace BookStoreApiService.Controllers.TransferObjects
     public class BookCreateModel
     {
         /// <summary>
-        /// Book title 
+        ///     Book title
         /// </summary>
         [Required]
         public string Title { get; set; }

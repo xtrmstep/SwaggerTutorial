@@ -18,20 +18,22 @@ namespace BookStoreApiService.Controllers.ActionFilters
         private const string INVALID_USER_OR_PASSWORD = "Invalid user or password";
 
         /// <summary>
-        /// Gets or sets a value indicating whether more than one instance of the indicated attribute can be specified for a single program element.
+        ///     Gets or sets a value indicating whether more than one instance of the indicated attribute can be specified for a
+        ///     single program element.
         /// </summary>
         /// <returns>
-        /// true if more than one instance is allowed to be specified; otherwise, false. The default is false.
+        ///     true if more than one instance is allowed to be specified; otherwise, false. The default is false.
         /// </returns>
         public bool AllowMultiple => false; // note: I don't know why it is False. Saw on some examples.
 
         /// <summary>
-        /// Authenticates the request.
+        ///     Authenticates the request.
         /// </summary>
         /// <returns>
-        /// A Task that will perform authentication.
+        ///     A Task that will perform authentication.
         /// </returns>
-        /// <param name="context">The authentication context.</param><param name="cancellationToken">The token to monitor for cancellation requests.</param>
+        /// <param name="context">The authentication context.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;
@@ -90,7 +92,7 @@ namespace BookStoreApiService.Controllers.ActionFilters
         {
             var userAndPassword = Encoding.Default.GetString(Convert.FromBase64String(parameter));
             var tokens = userAndPassword.Split(':');
-            return tokens.Length == 2 
+            return tokens.Length == 2
                 ? new Tuple<string, string>(tokens[0], tokens[1])
                 : null;
         }

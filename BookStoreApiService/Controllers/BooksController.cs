@@ -54,7 +54,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="book">Book model</param>
         /// <returns></returns>
         [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Description = "Book is created", Type = typeof(BookReadModel))]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Book is created", Type = typeof (BookReadModel))]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         [ResponseType(typeof (BookReadModel))]
         public IHttpActionResult Post([FromUri] BookCreateModel book)

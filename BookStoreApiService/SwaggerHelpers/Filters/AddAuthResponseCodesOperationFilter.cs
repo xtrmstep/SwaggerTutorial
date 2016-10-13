@@ -8,7 +8,7 @@ using Swashbuckle.Swagger;
 namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     /// <summary>
-    /// This filter enforces authorization header to be applied for Swagger requests automatically
+    ///     This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
     public class AddAuthResponseCodesOperationFilter : IOperationFilter
     {
@@ -26,10 +26,12 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
             if (isAuthorized && !allowAnonymous)
             {
                 #region add 401 response code to secured methods
+
                 if (operation.responses == null)
                     operation.responses = new Dictionary<string, Response>();
                 if (!operation.responses.ContainsKey("401"))
-                    operation.responses.Add("401", new Response { description = "Unauthorized" }); 
+                    operation.responses.Add("401", new Response {description = "Unauthorized"});
+
                 #endregion
             }
         }

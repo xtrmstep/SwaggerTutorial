@@ -7,12 +7,12 @@ using System.Web.Http.Description;
 namespace BookStoreApiService.SwaggerHelpers
 {
     /// <summary>
-    /// Placeholder for action conflict resolvers
+    ///     Placeholder for action conflict resolvers
     /// </summary>
     public static class ConflictingActionsResolver
     {
         /// <summary>
-        /// Merges conflicting action into one
+        ///     Merges conflicting action into one
         /// </summary>
         /// <returns></returns>
         public static Func<IEnumerable<ApiDescription>, ApiDescription> MergeConflictingActions()
@@ -45,12 +45,12 @@ namespace BookStoreApiService.SwaggerHelpers
         }
 
         /// <summary>
-        /// The wrapper class to override IsOptional property of HTTP parameter
+        ///     The wrapper class to override IsOptional property of HTTP parameter
         /// </summary>
         public class OptionalHttpParameterDescriptor : ReflectedHttpParameterDescriptor
         {
             /// <summary>
-            /// Constructor
+            ///     Constructor
             /// </summary>
             /// <param name="parameterDescriptor"></param>
             public OptionalHttpParameterDescriptor(ReflectedHttpParameterDescriptor parameterDescriptor)
@@ -59,10 +59,10 @@ namespace BookStoreApiService.SwaggerHelpers
             }
 
             /// <summary>
-            /// Gets a value that indicates whether the parameter is optional.
+            ///     Gets a value that indicates whether the parameter is optional.
             /// </summary>
             /// <returns>
-            /// true if the parameter is optional; otherwise false.
+            ///     true if the parameter is optional; otherwise false.
             /// </returns>
             public override bool IsOptional => true;
         }

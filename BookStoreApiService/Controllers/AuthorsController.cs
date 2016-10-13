@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Filters;
 using AutoMapper;
 using BookStoreApiService.Controllers.Helpers;
 using BookStoreApiService.Controllers.TransferObjects;
@@ -37,12 +35,12 @@ namespace BookStoreApiService.Controllers
         }
 
         /// <summary>
-        /// Returns a list of authors
+        ///     Returns a list of authors
         /// </summary>
         /// <param name="count">Number of items to return</param>
         /// <param name="descending">If True the items will be sorted in the reverse alphabetic order</param>
         /// <returns></returns>
-        [ResponseType(typeof(IList<AuthorReadModel>))]
+        [ResponseType(typeof (IList<AuthorReadModel>))]
         [AllowAnonymous]
         public IHttpActionResult Get(int count, bool descending)
         {
@@ -75,7 +73,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="author">Author model</param>
         /// <returns></returns>
         [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Description = "Author is created", Type = typeof(AuthorReadModel))]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Author is created", Type = typeof (AuthorReadModel))]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         public IHttpActionResult Post([FromBody] AuthorCreateModel author)
         {

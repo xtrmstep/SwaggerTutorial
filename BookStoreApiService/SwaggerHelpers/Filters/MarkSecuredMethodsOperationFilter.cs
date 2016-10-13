@@ -8,7 +8,7 @@ using Swashbuckle.Swagger;
 namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     /// <summary>
-    /// This filter enforces authorization header to be applied for Swagger requests automatically
+    ///     This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
     public class MarkSecuredMethodsOperationFilter : IOperationFilter
     {
@@ -30,7 +30,7 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
 
                 var auth = new Dictionary<string, IEnumerable<string>>
                 {
-                    { "basic", Enumerable.Empty<string>()}
+                    {"basic", Enumerable.Empty<string>()}
                 };
 
                 operation.security.Add(auth);

@@ -8,7 +8,7 @@ using Swashbuckle.Swagger;
 namespace BookStoreApiService.SwaggerHelpers.Filters
 {
     /// <summary>
-    /// This filter enforces authorization header to be applied for Swagger requests automatically
+    ///     This filter enforces authorization header to be applied for Swagger requests automatically
     /// </summary>
     public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
     {

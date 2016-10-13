@@ -1,16 +1,17 @@
 ﻿namespace BookStoreApiService.Controllers.TransferObjects
 {
     /// <summary>
-    /// Data transfer object to Read or Update books
+    ///     Data transfer object to Read or Update books
     /// </summary>
     public class BookReadModel
     {
         /// <summary>
-        /// Book identifier
+        ///     Book identifier
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
-        /// Book title 
+        ///     Book title
         /// </summary>
         public string Title { get; set; }
     }

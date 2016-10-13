@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BookStoreApiService.Controllers.TransferObjects
+﻿namespace BookStoreApiService.Controllers.TransferObjects
 {
     public class AuthorUpdateModel
     {
         /// <summary>
-        /// Author full name
+        ///     Author full name
         /// </summary>
         public string Name { get; set; }
     }

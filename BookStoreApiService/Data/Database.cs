@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
 
@@ -17,6 +15,7 @@ namespace BookStoreApiService.Data
             entity.Id = newId;
             _data.Add(newId, entity);
         }
+
         public static T Read(int id)
         {
             T entity;
@@ -29,7 +28,7 @@ namespace BookStoreApiService.Data
         }
 
         /// <summary>
-        /// Updates the existing data
+        ///     Updates the existing data
         /// </summary>
         /// <param name="entity">Existing data which shall be updated using its ID</param>
         /// <exception cref="DataNotFoundException">Raised when data cannot be found by the identifier</exception>

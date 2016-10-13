@@ -54,7 +54,7 @@ namespace BookStoreApiService.Controllers
         /// <param name="store">Store model</param>
         /// <returns></returns>
         [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Description = "Store is created", Type = typeof(StoreReadModel))]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Store is created", Type = typeof (StoreReadModel))]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         [ResponseType(typeof (StoreReadModel))]
         public IHttpActionResult Post([FromBody] StoreCreateModel store)

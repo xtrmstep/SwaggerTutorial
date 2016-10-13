@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using BookStoreApiService.Controllers.ActionFilters;
-using BookStoreApiService.HttpHandlers;
+﻿using System.Web.Http;
 
 namespace BookStoreApiService
 {
@@ -18,11 +13,8 @@ namespace BookStoreApiService
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
+                );
         }
     }
 }

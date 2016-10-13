@@ -12,13 +12,13 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
     public class MultiOperationSwaggerGenerator : ISwaggerProvider
     {
         private readonly IApiExplorer _apiExplorer;
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly IDictionary<string, Info> _apiVersions;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly SwaggerGeneratorOptions _options;
 
         public MultiOperationSwaggerGenerator(ISwaggerProvider sp)
         {
-            var sg = (SwaggerGenerator)sp;
+            var sg = (SwaggerGenerator) sp;
             var privateFields = sg.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
             _apiExplorer = privateFields.First(pf => pf.Name == "_apiExplorer").GetValue(sg) as IApiExplorer;
             _jsonSerializerSettings = privateFields.First(pf => pf.Name == "_jsonSerializerSettings").GetValue(sg) as JsonSerializerSettings;
@@ -59,16 +59,13 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
                 info = info,
                 host = rootUri.Host + port,
                 basePath = (rootUri.AbsolutePath != "/") ? rootUri.AbsolutePath : null,
-                schemes = (_options.Schemes != null) ? _options.Schemes.ToList() : new[] { rootUri.Scheme }.ToList(),
+                schemes = (_options.Schemes != null) ? _options.Schemes.ToList() : new[] {rootUri.Scheme}.ToList(),
                 paths = paths,
                 definitions = schemaRegistry.Definitions,
                 securityDefinitions = _options.SecurityDefinitions
             };
 
-            foreach (var filter in _options.DocumentFilters)
-            {
-                filter.Apply(swaggerDoc, schemaRegistry, _apiExplorer);
-            }
+            foreach (var filter in _options.DocumentFilters) { filter.Apply(swaggerDoc, schemaRegistry, _apiExplorer); }
 
             return swaggerDoc;
         }
@@ -130,21 +127,21 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
             var parameters = apiDesc.ParameterDescriptions
                 .Select(paramDesc =>
                 {
-                    string location = GetParameterLocation(apiDesc, paramDesc);
+                    var location = GetParameterLocation(apiDesc, paramDesc);
                     return CreateParameter(location, paramDesc, schemaRegistry);
                 })
-                 .ToList();
+                .ToList();
 
             var responses = new Dictionary<string, Response>();
             var responseType = apiDesc.ResponseType();
-            if (responseType == null || responseType == typeof(void))
-                responses.Add("204", new Response { description = "No Content" });
+            if (responseType == null || responseType == typeof (void))
+                responses.Add("204", new Response {description = "No Content"});
             else
-                responses.Add("200", new Response { description = "OK", schema = schemaRegistry.GetOrRegister(responseType) });
+                responses.Add("200", new Response {description = "OK", schema = schemaRegistry.GetOrRegister(responseType)});
 
             var operation = new Operation
             {
-                tags = new[] { _options.GroupingKeySelector(apiDesc) },
+                tags = new[] {_options.GroupingKeySelector(apiDesc)},
                 operationId = apiDesc.FriendlyId(),
                 produces = apiDesc.Produces().ToList(),
                 consumes = apiDesc.Consumes().ToList(),
@@ -153,10 +150,7 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
                 deprecated = apiDesc.IsObsolete()
             };
 
-            foreach (var filter in _options.OperationFilters)
-            {
-                filter.Apply(operation, schemaRegistry, apiDesc);
-            }
+            foreach (var filter in _options.OperationFilters) { filter.Apply(operation, schemaRegistry, apiDesc); }
 
             return operation;
         }
@@ -165,10 +159,9 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
         {
             if (apiDesc.RelativePathSansQueryString().Contains("{" + paramDesc.Name + "}"))
                 return "path";
-            else if (paramDesc.Source == ApiParameterSource.FromBody && apiDesc.HttpMethod != HttpMethod.Get)
+            if (paramDesc.Source == ApiParameterSource.FromBody && apiDesc.HttpMethod != HttpMethod.Get)
                 return "body";
-            else
-                return "query";
+            return "query";
         }
 
         private Parameter CreateParameter(string location, ApiParameterDescription paramDesc, SchemaRegistry schemaRegistry)

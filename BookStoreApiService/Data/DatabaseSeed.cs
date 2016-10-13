@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BookStoreApiService.Models;
+﻿using BookStoreApiService.Models;
 
 namespace BookStoreApiService.Data
 {
     public static class DatabaseSeed
     {
-        private static bool _initialized = false;
+        private static bool _initialized;
+
         public static void Init()
         {
             if (_initialized) return;
@@ -18,9 +15,9 @@ namespace BookStoreApiService.Data
             Database<Author>.Clear();
             Database<Author>.Clear();
 
-            var author1 = new Author {Name = "Author 1" };
-            var author2 = new Author { Name = "Author 2" };
-            var author3 = new Author { Name = "Author 3" };
+            var author1 = new Author {Name = "Author 1"};
+            var author2 = new Author {Name = "Author 2"};
+            var author3 = new Author {Name = "Author 3"};
 
             Database<Author>.Create(author1);
             Database<Author>.Create(author2);
@@ -34,9 +31,9 @@ namespace BookStoreApiService.Data
             Database<Book>.Create(book2);
             Database<Book>.Create(book3);
 
-            var store1 = new Store { Name = "Store 1" };
-            var store2 = new Store { Name = "Store 2" };
-            var store3 = new Store { Name = "Store 3" };
+            var store1 = new Store {Name = "Store 1"};
+            var store2 = new Store {Name = "Store 2"};
+            var store3 = new Store {Name = "Store 3"};
 
             Database<Store>.Create(store1);
             Database<Store>.Create(store2);

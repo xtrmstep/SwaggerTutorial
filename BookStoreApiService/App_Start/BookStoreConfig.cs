@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using AutoMapper;
+﻿using AutoMapper;
 using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Models;
