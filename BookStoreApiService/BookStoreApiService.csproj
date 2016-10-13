@@ -117,6 +117,7 @@
     <Compile Include="Controllers\TransferObjects\AuthorUpdateModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookPublisherInfo.cs" />
     <Compile Include="Controllers\TransferObjects\BookUpdateModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookCreateModel.cs" />

@@ -9,5 +9,7 @@ namespace BookStoreApiService.Controllers.TransferObjects
         /// </summary>
         [Required]
         public string Title { get; set; }
+
+        public BookPublisherInfo Publisher { get; set; }
     }
 }
