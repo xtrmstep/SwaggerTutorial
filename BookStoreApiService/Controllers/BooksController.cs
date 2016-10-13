@@ -57,7 +57,7 @@ namespace BookStoreApiService.Controllers
         [SwaggerResponse(HttpStatusCode.Created, Description = "Book is created", Type = typeof(BookReadModel))]
         [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         [ResponseType(typeof (BookReadModel))]
-        public IHttpActionResult Post([FromBody] BookCreateModel book)
+        public IHttpActionResult Post([FromUri] BookCreateModel book)
         {
             IHttpActionResult badRequest;
             if (!this.IsModelValid(ModelState, book, out badRequest)) return badRequest;

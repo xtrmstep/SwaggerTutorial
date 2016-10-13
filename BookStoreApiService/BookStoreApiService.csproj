@@ -117,6 +117,7 @@
     <Compile Include="Controllers\TransferObjects\AuthorUpdateModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\AuthorCreateModel.cs" />
+    <Compile Include="Controllers\TransferObjects\BookPublisherInfo.cs" />
     <Compile Include="Controllers\TransferObjects\BookUpdateModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookReadModel.cs" />
     <Compile Include="Controllers\TransferObjects\BookCreateModel.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="SwaggerHelpers\Filters\MarkSecuredMethodsOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\AddAuthorizationHeaderParameterOperationFilter.cs" />
     <Compile Include="SwaggerHelpers\Filters\MultiOperationSwaggerGenerator.cs" />
+    <Compile Include="SwaggerHelpers\Filters\RemoveNonJsonResponsesOperationFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
