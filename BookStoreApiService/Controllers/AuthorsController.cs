@@ -9,7 +9,6 @@ using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
-using Swashbuckle.Swagger.Annotations;
 
 namespace BookStoreApiService.Controllers
 {
@@ -56,7 +55,6 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
-        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         [ResponseType(typeof (AuthorReadModel))]
         public IHttpActionResult Get(int id)
         {
@@ -72,9 +70,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="author">Author model</param>
         /// <returns></returns>
-        [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Description = "Author is created", Type = typeof (AuthorReadModel))]
-        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
+        [ResponseType(typeof(AuthorReadModel))]
         public IHttpActionResult Post([FromBody] AuthorCreateModel author)
         {
             IHttpActionResult badRequest;
@@ -92,8 +88,6 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Author identifier</param>
         /// <param name="author">Author model</param>
         /// <returns></returns>
-        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
-        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         public IHttpActionResult Put(int id, [FromBody] AuthorUpdateModel author)
         {
             IHttpActionResult badRequest;
@@ -118,7 +112,6 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Author identifier</param>
         /// <returns></returns>
-        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: author with the identifier is not found")]
         public IHttpActionResult Delete(int id)
         {
             try
