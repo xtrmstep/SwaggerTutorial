@@ -8,6 +8,7 @@ using BookStoreApiService.Controllers.TransferObjects;
 using BookStoreApiService.Data;
 using BookStoreApiService.Data.Exceptions;
 using BookStoreApiService.Models;
+using Swashbuckle.Swagger.Annotations;
 
 namespace BookStoreApiService.Controllers
 {
@@ -36,6 +37,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: book with the identifier is not found")]
         [ResponseType(typeof (BookReadModel))]
         public IHttpActionResult Get(int id)
         {
@@ -51,6 +53,9 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="book">Book model</param>
         /// <returns></returns>
+        [SwaggerResponseRemoveDefaults]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Book is created", Type = typeof (BookReadModel))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
         [ResponseType(typeof (BookReadModel))]
         public IHttpActionResult Post([FromUri] BookCreateModel book)
         {
@@ -69,6 +74,8 @@ namespace BookStoreApiService.Controllers
         /// <param name="id">Book identifier</param>
         /// <param name="book">Book model</param>
         /// <returns></returns>
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Bad Request: the sent data is not valid")]
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: book with the identifier is not found")]
         public IHttpActionResult Put(int id, [FromBody] BookUpdateModel book)
         {
             IHttpActionResult badRequest;
@@ -92,6 +99,7 @@ namespace BookStoreApiService.Controllers
         /// </summary>
         /// <param name="id">Book identifier</param>
         /// <returns></returns>
+        [SwaggerResponse(HttpStatusCode.NotFound, Description = "Not Found: book with the identifier is not found")]
         public IHttpActionResult Delete(int id)
         {
             try

@@ -57,6 +57,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.4.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
@@ -96,10 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="SwaggerHelpers\scripts\swagger-basic-auth.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BookStoreConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActionFilters\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="Controllers\ActionFilters\AuthenticationFailureResult.cs" />
@@ -130,6 +136,12 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SwaggerHelpers\ConflictingActionsResolver.cs" />
+    <Compile Include="SwaggerHelpers\Filters\AddAuthResponseCodesOperationFilter.cs" />
+    <Compile Include="SwaggerHelpers\Filters\MarkSecuredMethodsOperationFilter.cs" />
+    <Compile Include="SwaggerHelpers\Filters\AddAuthorizationHeaderParameterOperationFilter.cs" />
+    <Compile Include="SwaggerHelpers\Filters\MultiOperationSwaggerGenerator.cs" />
+    <Compile Include="SwaggerHelpers\Filters\RemoveNonJsonResponsesOperationFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
