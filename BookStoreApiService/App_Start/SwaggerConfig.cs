@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Web.Http;
 using BookStoreApiService;
 using BookStoreApiService.SwaggerHelpers;
@@ -156,7 +157,8 @@ namespace BookStoreApiService
                     //
                     //c.OperationFilter<AssignOAuth2SecurityRequirements>();
 
-                    c.OperationFilter<AddAuthResponseCodesOperationFilter>();
+                    c.OperationFilter(() => new AddResponseCodesOperationFilter(HttpStatusCode.Unauthorized, HttpStatusCode.BadRequest));
+                    //c.OperationFilter(() => new AddResponseCodesOperationFilter(HttpStatusCode.Unauthorized));
                     //c.OperationFilter<MarkSecuredMethods>();
                     //c.OperationFilter<AddAuthorizationHeaderParameter>();
                     //c.OperationFilter<RemoveNonJsonResponsesOperationFilter>();
