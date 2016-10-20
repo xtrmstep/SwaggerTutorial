@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using BookStoreApiService.HttpHandlers;
 
 namespace BookStoreApiService
 {
@@ -7,7 +8,7 @@ namespace BookStoreApiService
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            //config.MessageHandlers.Add(new MandatoryHeadersHandler());
+            config.MessageHandlers.Add(new MandatoryHeadersHandler());
             //config.Filters.Add(new BasicAuthenticationFilter());
 
             // Web API routes
