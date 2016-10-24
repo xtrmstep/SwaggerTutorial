@@ -8,7 +8,10 @@ namespace BookStoreApiService.HttpHandlers
 {
     public class MandatoryHeadersHandler : DelegatingHandler
     {
-        private readonly string[] _mandatoryHeaders = {"X-Org", "X-Version", "X-UserId"};
+        private const string X_FOURTH_ORG = "X-Fourth-Org";
+        private const string X_FOURTH_VERSION = "X-Fourth-Version";
+        private const string X_FOURTH_USERID = "X-Fourth-UserId";
+        private readonly string[] _mandatoryHeaders = {X_FOURTH_ORG, X_FOURTH_VERSION, X_FOURTH_USERID};
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
@@ -16,22 +19,22 @@ namespace BookStoreApiService.HttpHandlers
             string xVersion;
             string xUserId;
 
-            if (request.RequestUri.ToString().Contains("swagger"))
-            {
-                xOrg = "SwaggerTest";
-                xVersion = "1";
-                xUserId = "Test";
-            }
-            else
-            {
+            //if (request.RequestUri.ToString().Contains("swagger"))
+            //{
+            //    xOrg = "SwaggerTest";
+            //    xVersion = "1";
+            //    xUserId = "Test";
+            //}
+            //else
+            //{
                 if (_mandatoryHeaders.All(request.Headers.Contains) == false)
                     return BadRequestAsync("Missing required headers");
 
 
-                xOrg = request.Headers.GetValues("X-Org").First();
-                xVersion = request.Headers.GetValues("X-Version").First();
-                xUserId = request.Headers.GetValues("X-UserId").First();
-            }
+                xOrg = request.Headers.GetValues(X_FOURTH_ORG).First();
+                xVersion = request.Headers.GetValues(X_FOURTH_VERSION).First();
+                xUserId = request.Headers.GetValues(X_FOURTH_USERID).First();
+            //}
 
             if (xOrg != "SwaggerTest")
                 return BadRequestAsync("Wrong X-Org value. It should be 'SwaggerTest'.");
