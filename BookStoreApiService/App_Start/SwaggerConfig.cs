@@ -158,7 +158,7 @@ namespace BookStoreApiService
 
                     // operation filters
                     //c.OperationFilter<AddAuthResponseCodesOperationFilter>();
-                    //c.OperationFilter<MarkSecuredMethods>();
+                    //c.OperationFilter<MarkSecuredMethodsOperationFilter>();
                     //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
                     //c.OperationFilter<RemoveNonJsonResponsesOperationFilter>();
 
