@@ -159,7 +159,7 @@ namespace BookStoreApiService
                     // operation filters
                     //c.OperationFilter<AddAuthResponseCodesOperationFilter>();
                     //c.OperationFilter<MarkSecuredMethods>();
-                    //c.OperationFilter<AddAuthorizationHeaderParameter>();
+                    //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
                     //c.OperationFilter<RemoveNonJsonResponsesOperationFilter>();
 
                     // Post-modify the entire Swagger document by wiring up one or more Document filters.
