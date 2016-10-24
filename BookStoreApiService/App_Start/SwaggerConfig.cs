@@ -156,7 +156,8 @@ namespace BookStoreApiService
                     //
                     //c.OperationFilter<AssignOAuth2SecurityRequirements>();
 
-                    c.OperationFilter<AddAuthResponseCodesOperationFilter>();
+                    // operation filters
+                    //c.OperationFilter<AddAuthResponseCodesOperationFilter>();
                     //c.OperationFilter<MarkSecuredMethods>();
                     //c.OperationFilter<AddAuthorizationHeaderParameter>();
                     //c.OperationFilter<RemoveNonJsonResponsesOperationFilter>();
@@ -194,7 +195,8 @@ namespace BookStoreApiService
                     // "Logical Name" is passed to the method as shown above.
                     //
                     //c.InjectJavaScript(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript1.js");
-                    c.InjectJavaScript(thisAssembly, "BookStoreApiService.SwaggerHelpers.scripts.swagger-basic-auth.js");
+                    
+                    //c.InjectJavaScript(thisAssembly, "BookStoreApiService.SwaggerHelpers.scripts.swagger-basic-auth.js");
 
                     // The swagger-ui renders boolean data types as a dropdown. By default, it provides "true" and "false"
                     // strings as the possible choices. You can use this option to change these to something else,
