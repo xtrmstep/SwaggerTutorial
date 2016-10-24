@@ -57,7 +57,7 @@ namespace BookStoreApiService
                     // you'll need to implement a custom IDocumentFilter and/or IOperationFilter to set these properties
                     // according to your specific authorization implementation
                     //
-                    //c.BasicAuth("basic").Description("Basic HTTP Authentication");
+                    c.BasicAuth("basic").Description("Basic HTTP Authentication");
                     //
                     // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                     //c.ApiKey("apiKey")
@@ -158,7 +158,7 @@ namespace BookStoreApiService
 
                     // operation filters
                     //c.OperationFilter<AddAuthResponseCodesOperationFilter>();
-                    //c.OperationFilter<MarkSecuredMethodsOperationFilter>();
+                    c.OperationFilter<MarkSecuredMethodsOperationFilter>();
                     //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
                     //c.OperationFilter<RemoveNonJsonResponsesOperationFilter>();
 

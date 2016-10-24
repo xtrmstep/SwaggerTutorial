@@ -12,7 +12,7 @@ namespace BookStoreApiService
 
             // Basic Authorization attributes
             config.Filters.Add(new AuthorizeAttribute());
-            //config.Filters.Add(new BasicAuthenticationFilter());
+            config.Filters.Add(new BasicAuthenticationFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
