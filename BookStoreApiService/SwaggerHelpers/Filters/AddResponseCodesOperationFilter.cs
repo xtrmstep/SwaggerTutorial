@@ -26,6 +26,9 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
 
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
+            if (operation.responses == null)
+                operation.responses = new Dictionary<string, Response>();
+
             foreach (var code in _codes) {
                 var codeNum = ((int)code).ToString();
                 var codeName = code.ToString();
@@ -33,8 +36,6 @@ namespace BookStoreApiService.SwaggerHelpers.Filters
                 // if the operation allows unauthorized access then 401 is not needed
                 if (code == HttpStatusCode.Unauthorized && IsAuthorizedOperation(apiDescription) == false) continue;
 
-                if (operation.responses == null)
-                    operation.responses = new Dictionary<string, Response>();
                 if (!operation.responses.ContainsKey(codeNum))
                     operation.responses.Add(codeNum, new Response { description = codeName });
             }
